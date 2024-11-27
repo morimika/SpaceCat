@@ -1,3 +1,4 @@
+using DG.Tweening;
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,9 +8,21 @@ public class PlayerLayer : MonoBehaviour
 {
     [SerializeField]
     private SpriteRenderer _playerSpriteRend;
+
+    public static bool DoFuwa;
     void Start()
     {
-        _playerSpriteRend=this.GetComponent<SpriteRenderer>();
+        DG.Tweening.DOTween.SetTweensCapacity(tweenersCapacity: 800, sequencesCapacity: 200);
+        _playerSpriteRend =this.GetComponent<SpriteRenderer>();
+        transform.DOMoveY(this.transform.position.y-0.2f, 2f).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
+    }
+
+    private void Update()
+    {
+        if (DoFuwa)
+        {
+
+        }
     }
 
     [SerializeField, Button]
@@ -21,5 +34,16 @@ public class PlayerLayer : MonoBehaviour
     private void OnBack()
     {
         _playerSpriteRend.sortingOrder = -30000;
+    }
+
+    [SerializeField, Button]
+    private void ToGame()
+    {
+        this.gameObject.transform.DOMoveY(-95,3f).SetEase(Ease.InOutQuad);
+    }
+    [SerializeField, Button]
+    private void ToResult()
+    {
+        this.gameObject.transform.DOMoveY(0, 3f).SetEase(Ease.InOutQuad);
     }
 }

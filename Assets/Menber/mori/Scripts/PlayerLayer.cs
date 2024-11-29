@@ -19,30 +19,27 @@ public class PlayerLayer : MonoBehaviour
 
     private void Update()
     {
-        if (DoFuwa)
-        {
 
-        }
     }
 
     [SerializeField, Button]
-    private void OnFront()
+    public void OnFront()
     {
         _playerSpriteRend.sortingOrder = 10;
     }
     [SerializeField, Button]
-    private void OnBack()
+    public void OnBack()
     {
         _playerSpriteRend.sortingOrder = -30000;
     }
 
     [SerializeField, Button]
-    private void ToGame()
+    public void ToGame()
     {
         this.gameObject.transform.DOMoveY(-95,3f).SetEase(Ease.InOutQuad);
     }
     [SerializeField, Button]
-    private void ToResult()
+    public void ToResult()
     {
         this.gameObject.transform.DOMoveY(0, 3f).SetEase(Ease.InOutQuad);
     }

@@ -12,15 +12,17 @@ public class PlayerMove : MonoBehaviour
     private bool _isGameOver = false;
     public GameObject target;
 
+    private Vector3 mousePosition;
+    private Vector3 objPosition;
+
+
     private void Start()
     {
         //スタート位置、ターゲットの座標、速度
-        transform.position
-            = Vector3.MoveTowards(transform.position, target.transform.position, speed);
+        //transform.position
+        //    = Vector3.MoveTowards(transform.position, target.transform.position, speed);
 
-
-    }
-
+    }        
     void Update()
     {
         float moveX = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
@@ -30,7 +32,16 @@ public class PlayerMove : MonoBehaviour
         transform.position = new Vector2(
         //エリア指定して移動する
         Mathf.Clamp(transform.position.x + moveX, -8.5f, 8.5f),
-        Mathf.Clamp(transform.position.y + moveY, -15f, 4.5f)
+        Mathf.Clamp(transform.position.y + moveY, -100000f, 100000f)
         );
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            mousePosition = Input.mousePosition;
+            mousePosition.z = 10.0f;
+            objPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            this.transform.position = objPosition;
+        }
+
     }
 }

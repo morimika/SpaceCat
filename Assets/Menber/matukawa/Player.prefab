@@ -131,7 +131,8 @@ GameObject:
   - component: {fileID: 1696392297895768869}
   - component: {fileID: 854153272218946258}
   - component: {fileID: 7443431401523656379}
-  - component: {fileID: 7688799519354753651}
+  - component: {fileID: 4279795812390495000}
+  - component: {fileID: 3210017099818585396}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -234,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
---- !u!58 &7688799519354753651
+--- !u!58 &4279795812390495000
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -268,7 +269,34 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 6
+--- !u!50 &3210017099818585396
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4039022082152095167}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.01
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0.01
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &4790616019519753883
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,7 +475,6 @@ GameObject:
   m_Component:
   - component: {fileID: 678922136790085912}
   - component: {fileID: 8018605079152672019}
-  - component: {fileID: 2318329684218426620}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -522,20 +549,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2318329684218426620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6752408998342645432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fee92231e34647418bbe231ca2c9ae6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 4039022082152095167}
-  target: {fileID: 0}
-  angle: 0
-  radius: 1
-  center: {fileID: 4039022082152095167}

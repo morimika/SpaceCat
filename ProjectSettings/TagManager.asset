@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fish
+  - shark
+  - cucuember
   layers:
   - Default
   - TransparentFX

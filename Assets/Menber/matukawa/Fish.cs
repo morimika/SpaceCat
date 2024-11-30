@@ -11,9 +11,10 @@ public class Fish : MonoBehaviour
     private float x;
     private float y;
     private float z;
+
     private void Update()
     {
-        x = radius * Mathf.Sin(Time.time * speed);
+        x = target.transform.position.x + radius * Mathf.Sin(Time.time * speed);
         y = radius * Mathf.Cos(Time.time * speed);
         y = y + target.transform.position.y;
         z = target.transform.position.z;

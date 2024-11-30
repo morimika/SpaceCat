@@ -34,8 +34,14 @@ public class ResultManager_Mori : MonoBehaviour
     {
         PlayerLayer.DoFuwa = fuwafuwaMode;
     }
+    public void Resulu()
+    {
+        StartCoroutine(TextEnabled());
+    }
+
+
     [SerializeField, Button]
-    private IEnumerator TextEnabled()
+    public IEnumerator TextEnabled()
     {
         TitleTxt();
         yield return new WaitForSeconds(1);

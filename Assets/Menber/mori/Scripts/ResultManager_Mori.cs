@@ -5,21 +5,48 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Xml;
 
 public class ResultManager_Mori : MonoBehaviour
 {
     [SerializeField]
-    private Text _titleTxt;
+    private TextMeshProUGUI _titleTxt;
     [SerializeField]
-    private Text _crashTxt;
+    private TextMeshProUGUI _veloTxt;
+    [SerializeField] 
+    private TextMeshProUGUI _timeTxt;
     [SerializeField]
-    private Text _fishTxt;
+    private TextMeshProUGUI _fishTxt;
     [SerializeField]
-    private Text _uriTxt;
+    private TextMeshProUGUI _uriTxt;
+    [SerializeField]
+    private TextMeshProUGUI _crashTxt;
 
-    public static int CrashValue;
-    public static int FishValue;
-    public static int UriValue;
+    /// <summary>
+    /// Script:Accelerationで算出
+    /// 最高速度
+    /// </summary>
+    public static float VelocityValue = 0;
+    /// <summary>
+    /// Script:Accelerationで算出
+    /// かかった時間
+    /// </summary>
+    public static int TimeValue = 0;
+    /// <summary>
+    /// Script:
+    /// 魚を食べた回数
+    /// </summary>
+    public static int FishValue = 0;
+    /// <summary>
+    /// Script:
+    /// きゅうりに驚いた回数
+    /// </summary>
+    public static int UriValue = 0;
+    /// <summary>
+    /// Script:
+    /// 障害物に当たった回数
+    /// </summary>
+    public static int CrashValue = 0;
 
     [SerializeField]
     private bool fuwafuwaMode = false;
@@ -43,33 +70,41 @@ public class ResultManager_Mori : MonoBehaviour
     [SerializeField, Button]
     public IEnumerator TextEnabled()
     {
-        TitleTxt();
+        _titleTxt.text = "飛行結果";
+        _veloTxt.text = "最高速度：" + VelocityValue + "m/s";
+        _timeTxt.text = "経過時間：" + TimeValue + "s";
+        _fishTxt.text = "魚を食べた回数" + FishValue + "回";
+        _uriTxt.text = "キュウリに驚いた回数"+ UriValue + "回";
+        _crashTxt.text= "ぶつかった回数"+ CrashValue + "回";
+
+        TxtAnim(_titleTxt);
         yield return new WaitForSeconds(1);
-        CrashTxt();
+        TxtAnim(_titleTxt);
         yield return new WaitForSeconds(1);
-        FishTxt();
+        TxtAnim(_titleTxt);
         yield return new WaitForSeconds(1);
-        UriTxt();
+        TxtAnim(_titleTxt);
     }
 
     [SerializeField, Button]
-    private void TitleTxt()
+    public void TxtAnim(TextMeshProUGUI tmPro)
     {
-        _titleTxt.DOText("飛行結果",1f,scrambleMode:ScrambleMode.All);
+        StartCoroutine(Simple(tmPro));
     }
-    [SerializeField, Button]
-    private void CrashTxt()
+
+    private IEnumerator Simple(TextMeshProUGUI tmpText)
     {
-        _crashTxt.DOText("ぶつかった回数\n"+CrashValue+"回", 1f, scrambleMode: ScrambleMode.All);
-    }
-    [SerializeField, Button]
-    private void FishTxt()
-    {
-        _fishTxt.DOText("魚を食べた回数\n"+FishValue + "回", 1f, scrambleMode: ScrambleMode.All);
-    }
-    [SerializeField, Button]
-    private void UriTxt()
-    {
-        _uriTxt.DOText("キュウリに驚いた回数\n"+ UriValue + "回", 1f, scrambleMode: ScrambleMode.All);
+        // 文字の表示数を0に(テキストが表示されなくなる)
+        tmpText.maxVisibleCharacters = 0;
+
+        // テキストの文字数分ループ
+        for (var i = 0; i < tmpText.text.Length; i++)
+        {
+            // 一文字ごとに0.2秒待機
+            yield return new WaitForSeconds(0.2f);
+
+            // 文字の表示数を増やしていく
+            tmpText.maxVisibleCharacters = i + 1;
+        }
     }
 }

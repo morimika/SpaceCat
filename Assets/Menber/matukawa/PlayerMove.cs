@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 
 public class PlayerMove : MonoBehaviour

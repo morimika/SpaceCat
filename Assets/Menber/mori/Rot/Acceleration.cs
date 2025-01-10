@@ -10,7 +10,7 @@ public class Acceleration : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
     private float time;
-    private bool doOnceTimeReload = false;
+    public static bool doOnceTimeReload = false;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +49,7 @@ public class Acceleration : MonoBehaviour
         else if (time != 0 && doOnceTimeReload == false)
         {
             ResultManager_Mori.TimeValue = (int)time;
+            ResultManager_Mori.VelocityValue *= 9.8f;
             doOnceTimeReload = true;
         }
     }

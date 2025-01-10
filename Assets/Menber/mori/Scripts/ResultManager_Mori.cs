@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Xml;
+using UnityEngine.SceneManagement;
 
 public class ResultManager_Mori : MonoBehaviour
 {
@@ -21,6 +22,15 @@ public class ResultManager_Mori : MonoBehaviour
     private TextMeshProUGUI _uriTxt;
     [SerializeField]
     private TextMeshProUGUI _crashTxt;
+
+    [SerializeField]
+    private GameObject _startC;
+    [SerializeField]
+    private GameObject _endC;
+
+    [SerializeField]
+    private GameObject _player;
+    private Rigidbody2D _playerRig;
 
     /// <summary>
     /// Script:Accelerationで算出
@@ -54,36 +64,63 @@ public class ResultManager_Mori : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _endC.SetActive(false);
+        _playerRig=_player.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        PlayerLayer.DoFuwa = fuwafuwaMode;
     }
+
+    [SerializeField, Button]
     public void Resulu()
     {
+        _endC.SetActive (true);
         StartCoroutine(TextEnabled());
     }
 
-
     [SerializeField, Button]
+    public void ResetTxt()
+    {
+        _titleTxt.text = "";
+        _veloTxt.text = "";
+        _timeTxt.text = "";
+        _fishTxt.text = "";
+        _uriTxt.text = "";
+        _crashTxt.text = "";
+        VelocityValue = 0;
+        TimeValue = 0;
+        FishValue = 0;
+        UriValue = 0;
+        CrashValue = 0;
+        _startC.SetActive (true);
+        _endC.SetActive(false);
+        PlayerLayer.IsGameTime = false;
+        Acceleration.doOnceTimeReload = false;
+        _player.transform.position=new Vector3(0,-97.6f,0);
+        _playerRig.velocity=Vector2.zero;
+    }
+
     public IEnumerator TextEnabled()
     {
         _titleTxt.text = "飛行結果";
-        _veloTxt.text = "最高速度：" + VelocityValue + "m/s";
+        TxtAnim(_titleTxt);
+        yield return new WaitForSeconds(1);
+        _veloTxt.text = "最高速度：" + VelocityValue.ToString("F2") + "m/s";
+        TxtAnim(_veloTxt);
+        yield return new WaitForSeconds(1);
         _timeTxt.text = "経過時間：" + TimeValue + "s";
-        _fishTxt.text = "魚を食べた回数" + FishValue + "回";
-        _uriTxt.text = "キュウリに驚いた回数"+ UriValue + "回";
-        _crashTxt.text= "ぶつかった回数"+ CrashValue + "回";
-
-        TxtAnim(_titleTxt);
+        TxtAnim(_timeTxt);
         yield return new WaitForSeconds(1);
-        TxtAnim(_titleTxt);
+        _fishTxt.text = "魚を食べた回数：" + FishValue + "回";
+        TxtAnim(_fishTxt);
         yield return new WaitForSeconds(1);
-        TxtAnim(_titleTxt);
+        _uriTxt.text = "キュウリに驚いた回数："+ UriValue + "回";
+        TxtAnim(_uriTxt);
         yield return new WaitForSeconds(1);
-        TxtAnim(_titleTxt);
+        _crashTxt.text= "ぶつかった回数："+ CrashValue + "回";
+        TxtAnim(_crashTxt);
     }
 
     [SerializeField, Button]

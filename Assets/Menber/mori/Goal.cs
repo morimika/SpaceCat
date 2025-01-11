@@ -10,6 +10,9 @@ public class Goal : MonoBehaviour
     [SerializeField]
     private CircleCollider2D _circleCollider;
 
+    [SerializeField]
+    private PlayerLayer _playerLayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +27,20 @@ public class Goal : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
+            PlayerLayer.IsGameTime = false;
+            _playerLayer.ToResult();
+            _re.Resulu();
+            PlayerLayer._doFollow = false;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            PlayerLayer.IsGameTime = false;
+            _playerLayer.ToResult();
             _re.Resulu();
             PlayerLayer._doFollow = false;
         }

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Triggers;
 
 public class PlayerLayer : MonoBehaviour
 {
@@ -13,52 +14,56 @@ public class PlayerLayer : MonoBehaviour
     public static bool _doFollow;
 
     [SerializeField]
-    private GameObject _GameObject;
+    private GameObject _player;
+    private Rigidbody2D _playerRig;
 
     [SerializeField]
     private GameObject _startC;
+    [SerializeField]
+    private GameObject _endC;
 
+    public static bool IsGameTime = false;
 
     public static bool DoFuwa;
     void Start()
     {
-    //    DG.Tweening.DOTween.SetTweensCapacity(tweenersCapacity: 800, sequencesCapacity: 200);
         _playerSpriteRend =this.GetComponent<SpriteRenderer>();
-    //    transform.DOMoveY(this.transform.position.y-0.2f, 2f).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
+        _playerRig=_player.GetComponent<Rigidbody2D>();
+        IsGameTime = false;
     }
 
     private void Update()
     {
         if(_doFollow)
         {
-            this.transform.position=_GameObject.transform.position;
+            this.transform.position=_player.transform.position;
         }
-    }
-
-    [SerializeField, Button]
-    public void OnFront()
-    {
-        _playerSpriteRend.sortingOrder = 10;
-    }
-    [SerializeField, Button]
-    public void OnBack()
-    {
-        _playerSpriteRend.sortingOrder = -30000;
+        if(!IsGameTime)
+        {
+            _playerRig.bodyType = RigidbodyType2D.Kinematic;
+        }
+        else
+        {
+            _playerRig.bodyType = RigidbodyType2D.Dynamic;
+        }
     }
 
     [SerializeField, Button]
     public async void ToGame()
     {
-        await this.gameObject.transform.DOMoveY(-95,3f).SetEase(Ease.InOutQuad);
-
-         ChangeParent();
+        await this.gameObject.transform.DOMoveY(-125, 3f).SetEase(Ease.InOutQuad);
+        IsGameTime = true;
+        ChangeParent();
     }
     [SerializeField, Button]
     public void ToResult()
     {
+        _endC.SetActive(true);
+        IsGameTime = false;
         this.gameObject.transform.DOMoveY(0, 3f).SetEase(Ease.InOutQuad);
+        this.gameObject.transform.DOMoveX(0, 3f).SetEase(Ease.InOutQuad);
     }
-    void ChangeParent()
+    public void ChangeParent()
     {
         _doFollow = true;
         _startC.SetActive(false);

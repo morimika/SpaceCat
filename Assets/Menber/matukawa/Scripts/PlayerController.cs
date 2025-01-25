@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     // きゅうりに当たった時、加算される重力の大きさ
     [SerializeField, Label("加算される重力の大きさ")] float cucumberCrush = 0.5f;
     // きゅうりに当たった時、減らされる重力の大きさ
-    [SerializeField, Label("加算される重力の大きさ")] float fishCrush = -0.5f;
+    [SerializeField, Label("減算される重力の大きさ")] float fishCrush = -0.5f;
 
     [SerializeField]
     private ResultManager_Mori _re;

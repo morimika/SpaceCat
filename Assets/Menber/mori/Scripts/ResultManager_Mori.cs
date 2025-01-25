@@ -113,12 +113,12 @@ public class ResultManager_Mori : MonoBehaviour
         _timeTxt.text = "経過時間：" + TimeValue + "s";
         TxtAnim(_timeTxt);
         yield return new WaitForSeconds(1);
-        _fishTxt.text = "魚を食べた回数：" + FishValue + "回";
-        TxtAnim(_fishTxt);
-        yield return new WaitForSeconds(1);
-        _uriTxt.text = "キュウリに驚いた回数："+ UriValue + "回";
-        TxtAnim(_uriTxt);
-        yield return new WaitForSeconds(1);
+        //_fishTxt.text = "魚を食べた回数：" + FishValue + "回";
+        //TxtAnim(_fishTxt);
+        //yield return new WaitForSeconds(1);
+        //_uriTxt.text = "キュウリに驚いた回数："+ UriValue + "回";
+        //TxtAnim(_uriTxt);
+        //yield return new WaitForSeconds(1);
         _crashTxt.text= "ぶつかった回数："+ CrashValue + "回";
         TxtAnim(_crashTxt);
     }

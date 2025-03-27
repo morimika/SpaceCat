@@ -7,7 +7,7 @@ using NaughtyAttributes;
 
 public class ExplainCanvas : MonoBehaviour
 {
-    [Label("このスクリプトの使い方")] string st = "ゲームスタートボタンにつけて、クリックしたら[OnClickStart]が呼ばれるようにする";
+    [SerializeField, Label("このスクリプトの使い方")] string st = "ゲームスタートボタンにつけて、クリックしたら[OnClickStart]が呼ばれるようにする";
 
     // 対象のテキスト
     [SerializeField] private TMP_Text _text1;

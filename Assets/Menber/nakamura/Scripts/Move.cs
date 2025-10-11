@@ -22,6 +22,9 @@ public class Move : MonoBehaviour
         if (transform.position.x <= leftEdge.x)
             direction = 1;
         //ˆÚ“®
-        transform.position = new Vector2(transform.position.x + moveSpeed * Time.fixedDeltaTime * direction, 0);
+        //mori ’Ç‹L yÀ•W
+        transform.position 
+            = new Vector2(this.transform.position.x + moveSpeed * Time.fixedDeltaTime * direction
+                        , this.transform.position.y);
     }
 }

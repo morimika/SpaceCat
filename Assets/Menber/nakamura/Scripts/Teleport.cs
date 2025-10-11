@@ -15,8 +15,13 @@ public class Teleport : MonoBehaviour
         //対象と衝突したら
         if(collision.gameObject.CompareTag(teleportTag))
         {
+            //mori 追記　速度維持
+            Rigidbody2D rg = collision.gameObject.GetComponent<Rigidbody2D>();
+            Vector2 vel = rg.velocity;
             //指定場所に強制移動させる
             collision.gameObject.transform.position = teleportExitPos.transform.position;
+            //moriワープ前速度反映
+            rg.velocity = vel;
         }
     }
 }
